@@ -14,8 +14,7 @@ int main()
 
 	//Declare Variables
 	string inputF, inputT; //user input (from & to)
-	int rowS, rowE; //row start, row end
-	int columnS, columnE; //column start, column end
+	int move[4]; //row start, column start, row end, column end
 
 	//Save the game data into a file.
 	ofstream gameData;
@@ -46,17 +45,16 @@ int main()
 			cout << "from: ";
 			cin >> inputF;
 
-			rowS = inputF[0] - '0';
-			columnS = inputF[1] - 'a';
+			move[0] = inputF[0] - '1';
+			move[1] = inputF[1] - 'a';
 
 			cout << "to: ";
 			cin >> inputT;
 
-			rowE = inputT[0] - '0';
-			columnE = inputT[1] - 'a';
+			move[2] = inputT[0] - '1';
+			move[3] = inputT[1] - 'a';
 
-			if (PlayerTurn(boardState, (int)piece::RED, rowS - 1,
-				columnS, rowE - 1, columnE))
+			if (PlayerTurn(boardState, (int)piece::RED, move))
 			{
 				gameData << "R: From " << inputF;
 				gameData << " To " << inputT << endl;
@@ -82,18 +80,16 @@ int main()
 			cout << "from: ";
 			cin >> inputF;
 
-			rowS = inputF[0] - '0';
-			columnS = inputF[1] - 'a';
+			move[0] = inputF[0] - '1';
+			move[1] = inputF[1] - 'a';
 
 			cout << "to: ";
 			cin >> inputT;
 
-			rowE = inputT[0] - '0';
-			columnE = inputT[1] - 'a';
-
-
-			if (PlayerTurn(boardState, (int)piece::WHITE, rowS - 1,
-				columnS, rowE - 1, columnE))
+			move[2] = inputT[0] - '1';
+			move[3] = inputT[1] - 'a';
+			
+			if (PlayerTurn(boardState, (int)piece::WHITE, move))
 			{
 				gameData << "W: From " << inputF;
 				gameData << " To " << inputT << endl;

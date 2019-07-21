@@ -28,4 +28,4 @@ void swap(int&, int&);
 char SymbolConvert(int);
 bool CheckWin(int state[][COLS]);
 void DisplayBoard(int state[][COLS]);
-bool PlayerTurn(int state[][COLS], int, int, int, int, int);
+bool PlayerTurn(int state[][COLS], int, int*);

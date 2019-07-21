@@ -72,40 +72,38 @@ char SymbolConvert(int i)
 	}
 }
 
-bool PlayerTurn(int state[][COLS], int player, int rowS, int columnS, int rowE, int columnE)
+bool PlayerTurn(int state[][COLS], int player, int* move)
 {
 	//check delimitation bounds
-
-	if (0 > rowS || ROWS <= rowS) 
+	if (0 > move[0] || ROWS <= move[0])
 	{
 		cout << "Start row is out of bound" << endl;
 		return false;
 	}
 
-	if (0 > columnS || COLS <= columnS) 
+	if (0 > move[1] || COLS <= move[1])
 	{
 		cout << "Start column is out of bound" << endl;
 		return false;
 	}
 
-	if (0 > rowE || ROWS <= rowE) 
+	if (0 > move[2] || ROWS <= move[2])
 	{
 		cout << "End row is out of bound" << endl;
 		return false;
 	}
 
-	if (0 > columnE || COLS <= columnE) 
+	if (0 > move[3] || COLS <= move[3])
 	{
 		cout << "End column is out of bound" << endl;
 		return false;
 	}
 
 	//check the moving pattern
-
 	if ((int)piece::RED == player) 
 	{
-		if (state[rowS][columnS] != (int)piece::REDKING
-			&& rowS >= rowE) 
+		if (state[move[0]][move[1]] != (int)piece::REDKING
+			&& move[0] >= move[2])
 		{
 			cout << "RED piece must move down!" << endl;
 			return false;
@@ -113,8 +111,8 @@ bool PlayerTurn(int state[][COLS], int player, int rowS, int columnS, int rowE, 
 	}
 	else 
 	{
-		if (state[rowS][columnS] != (int)piece::WHITEKING
-			&& rowS <= rowE) 
+		if (state[move[0]][move[1]] != (int)piece::WHITEKING
+			&& move[0] <= move[2])
 		{
 			cout << "WHITE piece must move up!" << endl;
 			return false;
@@ -125,40 +123,40 @@ bool PlayerTurn(int state[][COLS], int player, int rowS, int columnS, int rowE, 
 	int enemyC;
 
 	//check if it's a regular move
-	if (1 == abs(rowS - rowE) || 1 == abs(columnS - columnE))
+	if (1 == abs(move[0] - move[2]) || 1 == abs(move[1] - move[3]))
 	{
-		swap(state[rowS][columnS], state[rowE][columnE]);
+		swap(state[move[0]][move[1]], state[move[2]][move[3]]);
 
-		if (player == (int)piece::RED && rowE == ROWS - 1)
+		if (player == (int)piece::RED && move[2] == ROWS - 1)
 		{
-			state[rowE][columnE] = (int)piece::REDKING;
+			state[move[2]][move[3]] = (int)piece::REDKING;
 		}
-		else if (player == (int)piece::WHITE && rowE == 0)
+		else if (player == (int)piece::WHITE && move[2] == 0)
 		{
-			state[rowE][columnE] = (int)piece::WHITEKING;
+			state[move[2]][move[3]] = (int)piece::WHITEKING;
 		}
 
 		return true;
 	}
 	//check if it's a jump move
-	else if (2 == abs(rowS - rowE) || 2 == abs(columnS - columnE))
+	else if (2 == abs(move[0] - move[2]) || 2 == abs(move[1] - move[3]))
 	{
-		if (rowS < rowE)
+		if (move[0] < move[2])
 		{
-			enemyR = rowS + 1;
+			enemyR = move[0] + 1;
 		}
 		else
 		{
-			enemyR = rowS - 1;
+			enemyR = move[0] - 1;
 		}
 
-		if (columnS < columnE)
+		if (move[1] < move[3])
 		{
-			enemyC = columnS + 1;
+			enemyC = move[1] + 1;
 		}
 		else
 		{
-			enemyC = columnS - 1;
+			enemyC = move[1] - 1;
 		}
 
 		if ((player == (int)piece::RED && state[enemyR][enemyC] != (int)piece::WHITE)
@@ -169,20 +167,20 @@ bool PlayerTurn(int state[][COLS], int player, int rowS, int columnS, int rowE, 
 		}
 
 		state[enemyR][enemyC] = 1;
-		swap(state[rowS][columnS], state[rowE][columnE]);
+		swap(state[move[0]][move[1]], state[move[2]][move[3]]);
 
-		if (player == (int)piece::RED && rowE == ROWS - 1)
+		if (player == (int)piece::RED && move[2] == ROWS - 1)
 		{
-			state[rowE][columnE] = (int)piece::REDKING;
+			state[move[2]][move[3]] = (int)piece::REDKING;
 		}
-		else if (player == (int)piece::WHITE && rowE == 0)
+		else if (player == (int)piece::WHITE && move[2] == 0)
 		{
-			state[rowE][columnE] = (int)piece::WHITEKING;
+			state[move[2]][move[3]] = (int)piece::WHITEKING;
 		}
 
 		return true;
 	}
 
-	cout << "Must move diagnally!" << endl;
+	cout << "Invalid move!" << endl;
 	return false;
 }
