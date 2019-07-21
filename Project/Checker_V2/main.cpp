@@ -22,7 +22,7 @@ int main()
 	gameData.open("checker.txt");
 
 	// initial board state
-	int boardState[] {
+	int boardState[]{
 		0,2,0,2,0,2,0,2,
 		2,0,2,0,2,0,2,0,
 		0,2,0,2,0,2,0,2,
@@ -30,7 +30,7 @@ int main()
 		0,1,0,1,0,1,0,1,
 		3,0,3,0,3,0,3,0,
 		0,3,0,3,0,3,0,3,
-		3,0,3,0,3,0,3,0	
+		3,0,3,0,3,0,3,0
 	};
 
 	// display board state
