@@ -35,6 +35,7 @@ bool CheckWin(int* state)
 
 void DisplayBoard(int* state, char* symbol)
 {
+	system("cls");
 	cout << endl << "  .___.___.___.___.___.___.___.___." << endl;
 
 	for (int row = 0; row < SIZE; ++row)
