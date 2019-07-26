@@ -13,6 +13,7 @@
 #include <ctime>    //Time
 #include <string>  //String
 #include <cmath>   //Math
+#include <vector> //Vector Library
 
 #define SIZE 8
 
@@ -25,5 +26,7 @@ enum class piece : short
 
 void swap(int&, int&);
 bool CheckWin(int* state);
+void SelectionSort(int *, int);
+void BubbleSort(int *, int);
 void DisplayBoard(int* state, char* symbol);
-bool PlayerTurn(int* state, int, int*);
+bool PlayerTurn(int* state, int, vector <int>);

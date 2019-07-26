@@ -15,23 +15,29 @@ int main()
 	//Declare Variables
 	char symbol[]{ ' ', '_','r','w','R','W','\0' };
 	string inputF, inputT; //move input (from & to)
-	int move[4]; //indicate row_start, column_start, row_end, column_end in order
+	vector<int> move; //store row_start, column_start, row_end, column_end in order for each move
 
 	//Save the game data into a file.
 	ofstream gamData;
 	gamData.open("checker.txt");
 
-	// initial board state
-	int bState[]{
-		0,2,0,2,0,2,0,2,
-		2,0,2,0,2,0,2,0,
-		0,2,0,2,0,2,0,2,
-		1,0,1,0,1,0,1,0,
-		0,1,0,1,0,1,0,1,
-		3,0,3,0,3,0,3,0,
-		0,3,0,3,0,3,0,3,
-		3,0,3,0,3,0,3,0
+	// initial board state, optimized using 1-d array
+	int* bState = new int[SIZE*SIZE];
+	BubbleSort(bState, SIZE*SIZE);
+	SelectionSort(bState, SIZE*SIZE);
+	
+	int checker[]{
+		0, 2, 0, 2, 0, 2, 0, 2,
+		2, 0, 2, 0, 2, 0, 2, 0,
+		0, 2, 0, 2, 0, 2, 0, 2,
+		1, 0, 1, 0, 1, 0, 1, 0,
+		0, 1, 0, 1, 0, 1, 0, 1,
+		3, 0, 3, 0, 3, 0, 3, 0,
+		0, 3, 0, 3, 0, 3, 0, 3,
+		3, 0, 3, 0, 3, 0, 3, 0
 	};
+
+	bState = checker;
 
 	// display board state
 	DisplayBoard(bState, symbol);

@@ -14,6 +14,45 @@ void swap(int &a, int &b)
 	b = t;
 }
 
+void SelectionSort(int *a, int size)
+{
+	for (int i = 0; i < size - 1; ++i)
+	{
+		int min = i;
+		for (int j = i + 1; j < size; ++j)
+		{
+			if (a[j] < a[min])
+			{
+				min = j;
+			}
+		}
+
+		if (min != i)
+		{
+			int tmp = a[i];
+			a[i] = a[min];
+			a[min] = tmp;
+		}
+	}
+}
+
+void BubbleSort(int *a, int size)
+{
+	for (int i = 0; i < size - 1; ++i)
+	{
+		for (int j = i + 1; j < size; ++j)
+		{
+			if (a[j] < a[i])
+			{
+
+				int tmp = a[i];
+				a[i] = a[j];
+				a[j] = tmp;
+			}
+		}
+	}
+}
+
 bool CheckWin(int* state)
 {
 	int redNum(0), whiteNum(0);
@@ -53,7 +92,7 @@ void DisplayBoard(int* state, char* symbol)
 	cout << "    a   b   c   d   e   f   g   h" << endl;
 }
 
-bool PlayerTurn(int* state, int player, int* move)
+bool PlayerTurn(int* state, int player, vector<int> move)
 {
 	//check delimitation bounds
 	if (0 > move[0] || SIZE <= move[0])
