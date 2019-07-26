@@ -22,11 +22,12 @@ int main()
 	gamData.open("checker.txt");
 
 	// initial board state, optimized using 1-d array
-	int* bState = new int[SIZE*SIZE];
+	const int size = SIZE * SIZE;
+	int* bState = new int[size];
 	
-	BubbleSort(bState, SIZE*SIZE); // bubble sort
-	SelectionSort(bState, SIZE*SIZE); // selection sort	
-	assert(-1 == BinarySearch(bState, 0, SIZE*SIZE, -1)); // binary search
+	BubbleSort(bState, size); // bubble sort
+	SelectionSort(bState, size); // selection sort	
+	assert(-1 == BinarySearch(bState, 0, size, -1)); // binary search
 	
 	int checker[]{
 		0, 2, 0, 2, 0, 2, 0, 2,
