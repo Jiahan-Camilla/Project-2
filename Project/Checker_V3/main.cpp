@@ -13,16 +13,16 @@ int main()
 	srand(static_cast<unsigned int>(time(NULL)));
 
 	//Declare Variables
-	char symbol[]{ ' ', '_','r','w','R','W' };
+	char symbol[]{ ' ', '_','r','w','R','W','\0' };
 	string inputF, inputT; //move input (from & to)
 	int move[4]; //indicate row_start, column_start, row_end, column_end in order
 
 	//Save the game data into a file.
-	ofstream gameData;
-	gameData.open("checker.txt");
+	ofstream gamData;
+	gamData.open("checker.txt");
 
 	// initial board state
-	int boardState[]{
+	int bState[]{
 		0,2,0,2,0,2,0,2,
 		2,0,2,0,2,0,2,0,
 		0,2,0,2,0,2,0,2,
@@ -34,7 +34,7 @@ int main()
 	};
 
 	// display board state
-	DisplayBoard(boardState, symbol);
+	DisplayBoard(bState, symbol);
 
 	//game in loop
 	do
@@ -55,19 +55,19 @@ int main()
 			move[2] = inputT[0] - '1';
 			move[3] = inputT[1] - 'a';
 
-			if (PlayerTurn(boardState, (int)piece::RED, move))
+			if (PlayerTurn(bState, (int)piece::RED, move))
 			{
-				gameData << "R: From " << inputF;
-				gameData << " To " << inputT << endl;
+				gamData << "R: From " << inputF;
+				gamData << " To " << inputT << endl;
 				break;
 			}
 		}
 
 		//display board
-		DisplayBoard(boardState, symbol);
+		DisplayBoard(bState, symbol);
 
 		//check win
-		if (CheckWin(boardState))
+		if (CheckWin(bState))
 		{
 			break;
 		}
@@ -88,25 +88,25 @@ int main()
 			move[2] = inputT[0] - '1';
 			move[3] = inputT[1] - 'a';
 			
-			if (PlayerTurn(boardState, (int)piece::WHITE, move))
+			if (PlayerTurn(bState, (int)piece::WHITE, move))
 			{
-				gameData << "W: From " << inputF;
-				gameData << " To " << inputT << endl;
+				gamData << "W: From " << inputF;
+				gamData << " To " << inputT << endl;
 				break;
 			}
 		}
 
 		//display board
-		DisplayBoard(boardState, symbol);
+		DisplayBoard(bState, symbol);
 
 		//check win
-		if (CheckWin(boardState))
+		if (CheckWin(bState))
 		{
 			break;
 		}
 	} while (true);
 
-	gameData.close();
+	gamData.close();
 
 	//Exit program
 	system("PAUSE");
