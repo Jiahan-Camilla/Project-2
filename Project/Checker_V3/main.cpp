@@ -23,8 +23,10 @@ int main()
 
 	// initial board state, optimized using 1-d array
 	int* bState = new int[SIZE*SIZE];
-	BubbleSort(bState, SIZE*SIZE);
-	SelectionSort(bState, SIZE*SIZE);
+	
+	BubbleSort(bState, SIZE*SIZE); // bubble sort
+	SelectionSort(bState, SIZE*SIZE); // selection sort	
+	assert(-1 == BinarySearch(bState, 0, SIZE*SIZE, -1)); // binary search
 	
 	int checker[]{
 		0, 2, 0, 2, 0, 2, 0, 2,
